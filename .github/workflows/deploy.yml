@@ -25,11 +25,12 @@ jobs:
         env:
           VITE_GEMINI_KEY: ${{ secrets.VITE_GEMINI_KEY }}
 
-      - name: Deploy to Hostinger via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Deploy via SFTP
+        uses: appleboy/scp-action@v0.1.7
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: /public_html/
+          source: "./dist/*"
+          target: "/home/u287283761/domains/aiondestino.com.mx/public_html"
+          strip_components: 1
